@@ -1,0 +1,477 @@
+openvas-manager (4.0.2) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - For new and updated features see openvas.org
+
+ -- Alexander Rau <arau@arxcorp.com>  Fri, 26 Jul 2013 23:03:36 +0200
+
+
+openvas-manager (3.0.3-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - Security bugfix that quotes search phrases for SQL.
+    - Bugfix to have Slave tasks consider max_checks and max_hosts preferences.
+    - Fixed bug to correctly consider user-defined NVT-specific timeouts to be sent
+      to the scanner.
+    - When getting all reports, get only the visible reports for the current user.
+    - Improved answer times by avoiding unnecessary database blocking,
+      especially when doing large reports.
+    - Improved UTF8 support for data received from OpenVAS Scanner.
+    - Improved hostname validation.
+    - Avoid empty lines in user rules.
+    - Fixed some build issues for older compilers and for newer glib versions.
+    - Improvement: Make the date formats of the PDF and LaTeX reports nicer.
+    - Improvement: Added mechanism for updating the report format UUIDs on startup.
+      This allows easier update of built-in report format plugins.
+    - Bugfix: Set port list when creating predefined
+      target.  Ensure that list is correct if target exists already.
+    - Bugfix: Consider filtered debug messages properly.
+    - Add DETECTION and NVT/XREF to RESULT in report import.
+    - Improve status management of running tasks.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Fri, 10 Aug 2012 22:55:36 +0200
+
+openvas-manager (3.0.1-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - A bug which caused the comment of imported configs to be empty has been fixed.
+    - Hostname and IP validation has been improved.
+    - A bug which caused the port list selection to be empty has been fixed.
+    - The minimum version requirements for the glib and gnutls libraries have been
+      set to the minimum requirements of OpenVAS Libraries (2.16 for glib and 2.2
+      for gnutls).
+    - Extra report formats work standalone.
+    - Observer lists now may also use ',' as separator.
+    - Observers may now also create notes and overrides for observed tasks.
+    - Opservers with with Role observer are now allowed to see single results
+      of the observed tasks.
+    - Added handling of ssh keys for authenticated tests for Master-Slave mode.
+    - The PID file is created earlier to avoid daemon handling believe there
+      is an error.
+    - Build improvements for modern gcc.
+    - Support for Port Lists has been added.
+    - Updated builtin Report Format Plugins HTML, Text and LaTeX/PDF to reflect
+      various new features that are already present in GSA, including delta and
+      prognostic reports. 
+    - Changed signing of Report Format Plugins to exclude comment.
+    - Improved product detection information in results XML.
+    - Improved performance for massiv scanner results by using transaction groups.
+    - Improved Import of Target lists to allow comma-separated, line-by-line lists.
+    - Doubled entries in Target lists are now eliminated.
+    - New optional Report Format Plugin for ARF.
+    - Updated OMP documentation.
+    - Various little bugs fixed.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Sat, 12 May 2012 17:55:53 +0200
+
+openvas-manager (3.0+beta8-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - Support for note lifetimes has been added.
+    - A bug which caused an incorrect result count in the Asset Management view has
+      been fixed.
+    - Support for displaying the hostname and the note and override lifetimes has
+      been added to the following report formats: HTML, LaTeX and TXT.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Sat, 03 Dec 2011 17:35:31 +0100
+
+openvas-manager (3.0+beta7-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - The handling of timestamps in reports has been improved.
+    - Report format signatures no longer contain user editable fields.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Thu, 24 Nov 2011 23:18:29 +0100
+
+openvas-manager (3.0+beta6-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - Support for listing NVTs addressing a certain CVE has been added.
+    - A bug which cause the wrong threat level to be displayed for tasks with
+      multiple reports under rare circumstances has been fixed.
+    - Support for override lifetimes has been added.
+    - Support for displaying the SCAP update timestamp has been added.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Thu, 17 Nov 2011 23:27:01 +0100
+
+openvas-manager (3.0+beta5-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - Support for asset management been added.
+    - Support for using SCAP data directly has been added.
+    - A support script for retrieving SCAP data has been added.
+    - Support for prognostic scans has been added.
+    - Support for large database files on 32-bit platforms has been improved.
+    - Support for task observers has been added.
+    - Support for individual time zones for users has been added.
+    - A bug which caused the filter result count to be calculated incorrectly when
+      searching for text phrases has been fixed.
+    - Support for sorting results by CVSS score has been added.
+    - Support for importing results sent through the XML escalator has been added.
+    - The max_host and max_checks scan performance parameters have been moved from
+      scan configs to tasks.
+    - Support for delta reports has been added.
+    - An issue which caused meta data for NVTs in the "Credentials" family to be not
+      present in the database has been fixed.
+    - A number of compiler warnings discovered by Stephan Kleine have been
+      addressed.
+    - A race condition which caused empty reports from the slave when running in
+      master-slave mode under certain conditions has been fixed.
+    - Scan start and end times are now set for imported reports.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Sat, 12 Nov 2011 19:38:48 +0100
+
+openvas-manager (3.0+beta2-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - An issue which caused the import of very large reports to fail under certain
+      circumstances has been fixed.
+    - An issue which caused the date of the scan end to be missing from scans if
+      they were associated with an escalator created with an early Manager version
+      has been fixed.
+    - The handling of long host lists has been improved.
+    - New feature: Trashcan. It is now possible to place objects in a trashcan
+      instead of deleting them directly.
+    - Support for Host Details reported by OpenVAS Scanner has been added.
+    - Support for container task (imported reports) has been added.
+    - Support for specifying an SSH port for Local Security Checks has been added.
+    - Security: Enforces strict permissions on sensitive OpenVAS Manager files.
+    - Security: Drop privileges before executing report format plugins if running with
+      elevated privileges.
+    - Security: Ensures report formats are trusted before executing them.
+    - Support for escalating result to a Sourcefire Defense Center has been added.
+    - Support for using an SSH key pair for SSH authentication has been added.
+    - The mail addresses supplied for an email escalator are now used in the correct
+      order.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Sat, 21 May 2011 22:07:47 +0200
+
+openvas-manager (2.0.3-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - Enforces strict permissions on sensitive OpenVAS Manager files.
+    - Drop privileges before executing report format plugins if running with
+      elevated privileges.
+    - Ensures report formats are trusted before executing them.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Fri, 22 Apr 2011 12:13:53 +0200
+
+openvas-manager (2.0.2-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - The test infrastructure has been updated.
+    - A bug which caused the host count to be calculated incorrectly under certain
+      circumstances has been fixed.
+    - A number of memory and resource leaks discovered by Felix Wolfsteller have
+      been closed.
+    - A bug which caused database migration to fail when upgrading very old
+      installations has been fixed.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Thu, 03 Mar 2011 01:41:38 +0100
+
+openvas-manager (2.0.1-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - Support for fallback system reports has been added in case where a full system
+      report is unavailable.
+    - The expected location for signatures has been updated to match the FHS related
+      changes in OpenVAS Scanner.
+    - The "unscanned_closed" preference now defaults to "yes" for predefined
+      configs.
+    - The report format signature infrastructure has been improved.
+    - A bug which caused valid host names to be reject under certain circumstances
+      has been fixed.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Wed, 23 Feb 2011 19:53:56 +0100
+
+openvas-manager (2.0.0-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - The logging behaviour when started with --verbose has been improved.
+    - The w3af NVT is no longer part of the Full and fast default scan config.
+    - The build environment has been cleaned up.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Wed, 09 Feb 2011 22:17:04 +0100
+
+openvas-manager (1.99.4-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - Documentation has been updated.
+    - OpenVAS Manager now uses pkg-config to find required libraries.
+    - An issue which caused the creation of overrides to fail under some
+      circumstances has been fixed.
+    - The installation is now compliant with Filesystem Hierarchy Standard (FHS
+      2.3).
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Fri, 04 Feb 2011 21:30:54 +0100
+
+openvas-manager (1.99.3-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - A security-relevant bug has been fixed regarding email escalation methods.
+      Configured OpenVAS users were able to damage installation and/or gain higher
+      privileges.
+    - An issue which caused database migration to fail under certain circumstances
+      has been fixed.
+    - The default log level has been reduced to warning to prevent the logging of
+      potentially sensitive information in the default configuration.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Mon, 24 Jan 2011 14:54:44 +0100
+
+openvas-manager (1.99.2-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - The protocol documentation has been brought up to date.
+    - The output of --version now complies with the GNU Coding Standards.
+    - Passwords are now masked when loggings LSC package creation commands.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Mon, 10 Jan 2011 16:02:16 +0100
+
+openvas-manager (1.99.1-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - The protocol documentation has been improved.
+    - Target credentials for SMB and SSH are now separated.
+    - Support for setting the port range for a target has been added.
+    - Hardening flags are now enabled during compile time to increase code quality.
+    - Support for retrieving the total number of results matching an applied filter
+      has been added.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Tue, 21 Dec 2010 14:02:16 +0100
+
+openvas-manager (1.98.3-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - The protocol self-documentation has been improved.
+    - NTLMSSP is now enabled by default.
+    - Escalator message now include more information.
+    - The LaTeX and PDF reports have been made more consistent with the other
+      report formats.
+    - An issue which caused internal links in the PDF report to link to wrong
+      results under certain circumstances has been fixed.
+    - An issue which caused some existing LSC credential packages to be empty on
+      subsequent downloads under certain circumstances has been fixed.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Fri, 10 Dec 2010 14:48:27 +0100
+
+openvas-manager (1.98.2-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - The protocol self-documentation has been improved.
+    - A number of superfluous log messages has been downgraded or removed.
+    - A bug which caused issues to be counted incorrectly in the ports overview has
+      been fixed.
+    - The generation of PDF and LaTeX reports is now faster.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Fri, 03 Dec 2010 18:14:52 +0100
+
+openvas-manager (1.98.1-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - Report Format plugin framework. All previous reporting features
+      were converted to plugins. The XML representation of a report
+      is now the base for any plugin and thus consistency of reports
+      is improved.
+
+      Report Format Plugins can be set active so that they
+      appear in the selection lists. Selections can consider
+      content types so that for example only the plugins with
+      content type "text" are offered as Email body.
+
+      It is possible to use parameters for the plugins so the
+      user can adjust the behaviour of the Report Format to
+      the individual preferences or needs.
+
+      A verification method allows to distribute signatures
+      for valid plugins via the NVT Feed.
+    - New default Report Format: TXT for simple text.
+    - New default Report Format: LaTeX for LaTeX source.
+    - New sample Report Format: Simple Bar Chart.
+      Demonstrates how to use Gnuplot for graphical reports.
+    - New sample Report Format: Simple Topo Plot.
+      Demonstrates how to use Graphviz for graphical reports.
+    - New sample Report Format: Simple Pie Chart.
+      Demonstrates how to use PyChart for graphical reports.
+    - New sample Report Format: Simple Map Plot.
+      Demonstrates how to use MapServer and GDAL for graphical reports.
+    - New sample Report Format: Sourcefire Host Input.
+    - Demonstrates that Report Formats can be used to build connectors.
+    - Master-Slave feature. Any OpenVAS Manager can use one or many other
+      OpenVAS Manager as slave to run scans. The whole scan task
+      is transferred to the slave, results are continuously reported
+      to the Master during scan process. After the scan is finished
+      all data are removed from the slave.
+
+      The master can also retrieve system reports from the slave and
+      thus can collect the performance overview for all configured slaves.
+    - New Escalator: HTTP GET. This allows for example to access
+      text message (SMS) gateways or ticket management systems.
+    - Extended Escalator: For EMail escalation it is now possible
+      to select from configured Report Formats to be included in the
+      Email body.
+    - Agents: A verification method was added. This allows to
+      distribute signatures for valid agents via the NVT Feed.
+    - Credentials: Can now be edited. This allows to change the login
+      name or password without the need to create a new scan configuration.
+    - Credentials: Auto-generated installer packages are now created on
+      the fly. If the generators are improved, it is now easy to create
+      an updated package for already existing credentials.
+    - OMP self-documentation: Part of the Managers' XML-based communication protocol
+      OMP 2.0 is to deliver the full specification and documentation of the
+      protocol itself (command "HELP"). It can be retrieved as XML-,
+      RNC- or HTML representation.
+    - Targets: Various opportunities have been added to specify and combine IP ranges.
+    - Tasks: The task overview is delivered much faster now.
+    - Reports: The report filtering is much faster now.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Fri, 19 Nov 2010 17:49:08 +0100
+
+openvas-manager (1.0.3-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - Two bugs which caused the manager to fail to give adequate replies on certain
+      report and scan config requests have been fixed.
+    - A bug which caused PDF reports to be unavailable for reports which contained
+      certain unicode character has been fixed.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Sun, 31 Oct 2010 19:29:08 +0100
+
+openvas-manager (1.0.2-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - A bug which could cause changes in derived scan configs to affect predefined
+      scan configs under certain circumstances has been fixed.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Tue, 17 Aug 2010 16:25:42 +0200
+
+openvas-manager (1.0.1-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - A fix for incorrect preference values in the database has been adjusted to
+      work with GSA 1.0.1 as well.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Mon, 09 Aug 2010 16:41:26 +0200
+
+openvas-manager (1.0.0-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - A number of build issues has been addressed.
+    - The code documentation has been updated.
+    - Code cleanup: Internal error handling has been made more consistent.
+    - A potential ressource leak identified by static analysis has been fixed.
+    - A bug which caused NVT preferences to be displayed incorrectly has been
+      fixed.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Thu, 29 Jul 2010 15:40:02 +0200
+
+openvas-manager (1.0.0.rc1-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - Code cleanup: Internal resource management has been improved to use UUIDs in
+      more places.
+    - Support for agents has been improved.
+    - Support for external target sources has been added.
+    - A bug which caused PDF exports to fail if the NVT description contained
+      certain characters has been fixed.
+    - A bug which caused hosts in the scan result to be sorted incorrectly under
+      certain circumstances has been fixed.
+    - Support for defining threat overrides has been added.
+    - Some OMP commands have been renamed and adjusted to make the protocol more
+      concise and useful.
+    - Support for event logging has been added.
+    - Support for syslog escalators has been added.
+    - The documentation has been updated.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Fri, 16 Jul 2010 18:04:30 +0200
+
+openvas-manager (1.0.0.beta7-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - A large amount of code which was present in both openvas-manager and
+      openvas-administrator has been moved to openvas-libraries.
+    - An issue that caused started tasks to remain in the "Requested" stage
+      indenfinitely has been fixed.
+    - An issue that caused incorrect values of the scan progress under certain
+      conditions has been fixed.
+    - A new escalator condition has been add: Threat Level Changed.
+    - Open ports are now included in scan reports even if no vulnerability was
+      detected on that port.
+    - Support for CVSS scores and Risk Factors has been improved.
+    - Support for excluding host without any results from the report has been added.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Sat, 29 May 2010 09:31:25 +0200
+
+openvas-manager (1.0.0.beta6-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - A bug which caused incorrect NVT counts in the scan config under certain
+      circumstances has been fixed.
+    - The manager now uses certificate based authentication.
+    - Support for resuming stopped tasks has been added.
+    - Support for task scheduling has been added.
+    - The openvasmd binary will now install into /usr/sbin instead of /usr/bin.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Thu, 15 Apr 2010 17:59:16 +0200
+
+openvas-manager (1.0.0.beta5-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - More internal data structures are now identified by UUID and not by
+      name.
+    - Several build issues have been fixed.
+    - Note management has been introduced.
+    - Support for handling ITG and CPE reports has been added.
+    - OTP forwarding is now disabled by default.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Thu, 04 Mar 2010 19:12:18 +0100
+
+openvas-manager (1.0.0.beta4-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - More internal data structures are now identified by UUID and not by name.
+    - A bug which prevented PDF reports to be generated from certain results due to
+      unescaped LaTeX characters has been fixed.
+    - A number of formatting and casting issues found by Stephan Kleine have been
+      fixed.
+    - The man page has been updated.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Mon, 08 Feb 2010 12:21:06 +0100
+
+openvas-manager (1.0.0.beta3-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - Nmap is now the default port scanner for predefined configurations.
+    - The man page has been updated.
+    - LSC credential management has been improved.
+    - A number of internal data structures are now identified by UUID and not by
+      name.
+    - The manager now converts all input from the scanner to UTF-8.
+    - The encoding of the LaTeX report has been switch to UTF-8.
+    - A bug that caused some settings to be ignored during scan configuration import
+      has been fixed.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Fri, 05 Feb 2010 15:19:05 +0100
+
+openvas-manager (1.0.0.beta2-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - Deleting of active reports is prevented.
+    - Introduced ownership for all objects.
+      This makes objects (like a "target") not
+      appear for other users anymore.
+    - Improved ISO-8859-1 to UTF-8 conversion hacks.
+    - Allowed "\" for login names (important for windows)
+    - Send users host restrictions ("rules") via OTP when
+      starting a scan.
+    - Activated NSIS package generator for credentials management.
+    - Filter out potentials passwords from logging.
+    - Introduced UUIDs for users.
+    - Improved PDF report generator.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Wed, 27 Jan 2010 11:49:33 +0100
+
+openvas-manager (1.0.0.beta1-1) UNRELEASED; urgency=low
+
+  * Initial package.
+
+ -- Stephan Kleine <bitshuffler@opensuse.org>  Sat, 23 Jan 2010 09:36:42 +0100

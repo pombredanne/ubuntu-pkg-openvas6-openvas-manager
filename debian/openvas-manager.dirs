@@ -1,0 +1,3 @@
+var/lib/openvas/mgr
+var/lib/openvas/openvasmd/report_formats
+var/log/openvas

@@ -1,0 +1,29 @@
+Source: openvas-manager
+Section: admin
+Priority: optional
+Maintainer: Stephan Kleine <bitshuffler@opensuse.org>
+Build-Depends: debhelper (>= 5), cmake, doxygen, dpatch, hardening-wrapper, libopenvas6-dev, libsqlite3-dev, pkg-config
+Standards-Version: 4.0.2
+
+Package: openvas-manager
+Section: net
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Manager Module of OpenVAS
+  The OpenVAS-Manager is a layer between OpenVAS-Scanner and various client
+  applications such as OpenVAS-Client or Greenbone Security Assistant.  Among
+  other features, it adds server-side storage of scan results and it makes it
+  unnecessary for scan clients to keep connection until a scan finishes.
+
+Package: openvas-manager-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: ${misc:Depends}, openvas-manager (= ${binary:Version})
+Description: Manager Module of OpenVAS (debug)
+  The OpenVAS-Manager is a layer between OpenVAS-Scanner and various client
+  applications such as OpenVAS-Client or Greenbone Security Assistant.  Among
+  other features, it adds server-side storage of scan results and it makes it
+  unnecessary for scan clients to keep connection until a scan finishes.
+  .
+  This package contains the debugging symbols.
