@@ -1,7 +1,7 @@
 Source: openvas-manager
 Section: admin
 Priority: optional
-Maintainer: Stephan Kleine <bitshuffler@opensuse.org>
+Maintainer: Build Service <srv.build@dinotools.org>
 Build-Depends: debhelper (>= 5), cmake, doxygen, dpatch, hardening-wrapper, libopenvas6-dev, libsqlite3-dev, pkg-config
 Standards-Version: 4.0.2
 

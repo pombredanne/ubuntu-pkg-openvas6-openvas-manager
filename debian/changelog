@@ -1,3 +1,9 @@
+openvas-manager (4.0.2-1ubuntu1~precise) precise; urgency=low
+
+  * Build for Ubuntu precise
+
+ -- Build Service <srv.build@dinotools.org>  Wed, 31 Jul 2013 23:14:45 +0200
+
 openvas-manager (4.0.2) UNRELEASED; urgency=low
 
   * New upstream release.
