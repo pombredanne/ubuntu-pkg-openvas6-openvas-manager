@@ -1,0 +1,1452 @@
+openvas-manager 4.0.2 (2013-07-05)
+
+This is the second maintenance release of the openvas-manager 4.0 module for the
+Open Vulnerability Assessment System release 6 (OpenVAS-6). The OpenVAS Manager
+is the central management service between the actual security scanner and
+various user clients.
+
+This release fixes an issue which caused an error when getting nvts with details
+when one nvt had unescaped ampersand in the xref field. It also fixes result
+port value validation in notes/overrides, improve performance for get_notes and
+a null pointer dereference fix.
+
+Many thanks to everyone who has contributed to this release:
+Hani Benhabiles, Timo Pollmeier, Matthew Mundell.
+
+Main changes since 4.0.2:
+* Improve GET_NOTES performance.
+* Apply report filtering on nvt tags and cve values too.
+* Check null pointer in create_config copy case.
+* Improve validation of results port in notes/overrides.
+* Escape xrefs before sending xml for nvts.
+
+
+openvas-manager 4.0.1 (2013-06-07)
+
+This is the first maintenance release of the openvas-manager 4.0 module for the
+Open Vulnerability Assessment System release 6 (OpenVAS-6). The OpenVAS Manager
+is the central management service between the actual security scanner and
+various user clients.
+
+This release fixes a number of issues which were discovered after the release
+of OpenVAS Manager 4.0.0. For details please refer to the list below.
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell and Michael Wiegand.
+
+Main changes since 4.0.0:
+* A bug which caused configured observers and alerts to be ignored when cloning
+  tasks has been fixed.
+* A bug which caused scans via slaves configured with incorrect credentials to
+  never leave the "Requested" state has been fixed.
+
+
+openvas-manager 4.0.0 (2013-04-12)
+
+This is the first release of the openvas-manager 4.0 module for the Open
+Vulnerability Assessment System release 6 (OpenVAS-6). The OpenVAS Manager is
+the central management service between the actual security scanner and various
+user clients.
+
+OpenVAS Manager 4.0 contains a number of new and improved features, for example
+automatic management of likely false positives and improved access to security
+information data like OVAL or DFN-CERT.
+For a complete list of changes, please refer to the list below.
+The whole functionality is available via the extended protocol: OMP 4.0.
+
+Many thanks to everyone who has contributed to this release:
+Sebastien Aucouturier, Hani Benhabiles, Andre Heinecke, Werner Koch, Matthew
+Mundell, Timo Pollmeier, Jan-Oliver Wagner and Michael Wiegand.
+
+Main changes since 3.0.x:
+* "Escalator" has been renamed to "Alert".
+* The GnuTLS dependency has been increased to 2.8.
+* The openvas-libraries dependency has been increased to 6.0.0.
+* New: Auto-FP feature to filter out likely false positives in a report.
+* New: Manage closed CVEs, as reported by the Scanner (trusted vendor updates).
+* New: Multiple alerts can now be attached to a task.
+* New: Wizard framework with first wizard "quick_first_scan" and user setting
+  for wizard appearance.
+* Added keyword filter, pagination and edit to Targets.
+* New command line options --listen2 and --port2 for a second OMP address.
+* Improvements to the target object management; targets can now be edited when
+  they are associated with a task and the task has not yet run.
+* The protocol documentation has been updated.
+* The powerfilter now handles spaces in index filters.
+* Object management has been extended to support creation and modification
+  times.
+* Support for disabling OMP commands via the command line has been added.
+* New: Management for Filter objects.
+* New: Report format plugins for ISMS tool "verinice".
+* New: Alert for sending results to a verinice .PRO server.
+* New: Support for accessing OVAL SecInfo data.
+* New: Support for accessing DFN-CERT SecInfo data.
+* New: The risk factor of an NVT is now calculated from the CVSS score.
+* New: Support for encrypted credentials has been added.
+* New: Support for checking user passwords against a policy has been
+  added.
+* Extended: Management for information such as CPE, including a extended SCAP
+  data synchronization.
+* Extended: Powerfilter now available for Reports.
+* Extended: Powerfilters can now be attached to Alerts.
+* Extended: New object management now supports for schedules, tasks,
+  slaves, report formats, port lists and scan configs.
+* Improved: Task overview now faster via extra caching methods.
+* Improved: Handle daylight saving in schedules.
+* Improved: Extended features of Powerfilter such as sorting and result ranges.
+* Improved: When importing a report, now the host details are also imported.
+* Improved: Reduced database locking times during some operations so that
+  less blocking happens.
+* Improved: Manager serves OMP even when the scanner is down.
+* Improved: Notes management now supports Powerfilter and Trashcan.
+* Improved: Added switch to control whether a task should contribute to asset
+  management.
+* Improved: Report exports now also contain the comment of the respective task.
+* Improved: Report exports now also contain the family of NVTs.
+* Improved: Faster report format plugins LaTeX and PDF.
+* Improved: Override management now supports Powerfilter and Trashcan.
+* Improved: Additional parameters in SCAP synchronization script.
+* Improved: Handling of the SCAP database.
+* Improved: Classification in the report format plugin for ISMS tool "verinice".
+* Improved: Performance with large database.
+* Improved: Handling of client timeouts during very long operations.
+* Improved: Faster report format plugins LaTeX, TXT, HTML and PDF.
+* Improved: Master-Slave communication.
+* Improved: IPv6 address validation.
+* The ARF report format plugin is now a pre-defined format.
+* Added creation and modification times to the powerfilter.
+* Added handling of OTP 1.1.
+* Improved: Hostname validation.
+* Simplified Report Format Plugin handling for pre-defined plugins.
+* Various bug fixes and small improvements.
+* User defined oval repositories in private directories.
+* Send nvt tags with results.
+* Install greenbone-certdata-sync script.
+* Exit if connecting to scanner fails in rebuild/update mode.
+* scapdata-sync check for duplicate IDs in verbose mode.
+
+And additionally changes compared to last release candidate 4.0+rc1:
+* Improved handling of SCAP and CERT databases.
+* Editing an associated config or target is now possible as long as a task is
+  in the "New" status.
+
+
+openvas-manager 4.0+rc1 (2013-03-19)
+
+This is the first release candidate version of the upcoming 4.0 release of the
+OpenVAS Manager. It is the central management service between the actual
+security scanner and various user clients.
+
+This release adds many improvements and new features to scapdata and certdata
+syncing scripts, increses GnuTLS dependency version to 2.8, brings fixes to
+manager rebuilding and updating as well as various bug fixes and documentation
+updates.
+
+Many thanks to everyone who has contributed to this release:
+Andre Heinecke, Timo Pollmeier, Hani Benhabiles, Jan-Oliver Wagner, Matthew
+Mundell.
+
+Main changes since 4.0+beta5:
+* Don't attach raw xml to verinice report.
+* Multiple scapdat and certdata bug fixes.
+* User defined oval repositories in private directories.
+* Send nvt tags with results.
+* OMP Documentation update.
+* Add oval status.
+* Install greenbone-certdata-sync script.
+* print handle_sigabort backtrace in debugging mode.
+* Increase GnuTLS dependency to version 2.8.
+* Various small bug fixes.
+* Exit if connecting to scanner fails in rebuild/update mode.
+* scapdata-sync check for duplicate IDs in verbose mode.
+
+
+openvas-manager 4.0+beta5 (2013-02-22)
+
+This is the fifth beta version of the upcoming 4.0 release of the OpenVAS
+Manager. It is the central management service between the actual security
+scanner and various user clients.
+
+This release adds support for accessing OVAL and DFN-CERT SecInfo data,
+for encrypting credentials and for checking user passwords against a
+policy. It also features improvements to the report performance,
+Master-Slave communication and numerous smaller improvements.
+
+Many thanks to everyone who has contributed to this release:
+Hani Benhabiles, Andre Heinecke, Werner Koch, Matthew Mundell, Timo
+Pollmeier, Jan-Oliver Wagner and Michael Wiegand.
+
+Main changes since 4.0+beta4:
+* New: Support for accessing OVAL SecInfo data.
+* New: Support for accessing DFN-CERT SecInfo data.
+* New: The risk factor of an NVT is now calculated from the CVSS score.
+* New: Support for encrypted credentials has been added.
+* New: Support for checking user passwords against a policy has been
+  added.
+* Extended: New object management now supports for schedules, tasks,
+* slaves, report formats, port lists and scan configs.
+* Improved: Override management now supports Powerfilter and Trashcan.
+* Improved: Additional parameters in SCAP synchronization script.
+* Improved: Handling of the SCAP database.
+* Improved: Classification in the report format plugin for ISMS tool "verinice".
+* Improved: Performance with large database.
+* Improved: Handling of client timeouts during very long operations.
+* Improved: Faster report format plugins LaTeX, TXT, HTML and PDF.
+* Improved: Master-Slave communication.
+* Improved: IPv6 address validation.
+* Some functionality has been moved to the openvas-libraries module.
+  This means that openvas-manager 4.0.+beta5 requires openvas-libraries
+  6.0+beta5 or newer to build.
+
+
+openvas-manager 4.0+beta4 (2012-11-05)
+
+This is the fourth beta version of the upcoming 4.0 release of the OpenVAS
+Manager. It is the central management service between the actual security
+scanner and various user clients.
+
+This release reveals a large number of new and improved features. Noteworthy
+are the new features Auto-FP, Wizard-Framework, Multiple Alerts and the
+extended Powerfilter that also was connected to more object classes.
+
+Many thanks to everyone who has contributed to this release:
+Sebastien Aucouturier, Andre Heinecke, Matthew Mundell, Jan-Oliver Wagner
+and Michael Wiegand.
+
+Main changes since 4.0+beta3:
+* New: Auto-FP feature to filter out likely false positives in a report.
+* New: Manage closed CVEs, as reported by the Scanner (trusted vendor updates).
+* New: Multiple alerts can now be attached to a task.
+* New: Wizard framework with first wizard "quick_first_scan" and user setting
+  for wizard appearance.
+* New: Management for Filter objects.
+* New: Report format plugins for ISMS tool "verinice".
+* New: Alert for sending results to a verinice .PRO server.
+* Extended: Management for information such as CPE, including a extended SCAP
+  data synchronization.
+* Extended: Powerfilter now available for Reports.
+* Extended: Powerfilters can now be attached to Alerts.
+* Improved: Task overview now faster via extra caching methods.
+* Improved: Handle daylight saving in schedules.
+* Improved: Extended features of Powerfilter such as sorting and result ranges.
+* Improved: When importing a report, now the host details are also imported.
+* Improved: Reduced database locking times during some operations so that
+  less blocking happens.
+* Improved: Manager serves OMP even when the scanner is down.
+* Improved: Notes management now supports Powerfilter and Trashcan.
+* Improved: Added switch to control whether a task should contribute to asset
+  management.
+* Improved: Report exports now also contain the comment of the respective task.
+* Improved: Report exports now also contain the family of NVTs.
+* Improved: Faster report format plugins LaTeX and PDF.
+* The ARF report format plugin is now a pre-defined format.
+* Added creation and modification times to the powerfilter.
+* Added handling of OTP 1.1.
+* Improved: Hostname validation.
+* Simplified Report Format Plugin handling for pre-defined plugins.
+* Various bug fixes and small improvements.
+
+
+openvas-manager 4.0+beta3 (2012-05-04)
+
+This is the third beta version of the upcoming 4.0 release of the OpenVAS
+Manager. It is the central management service between the actual security
+scanner and various user clients.
+
+This release adds support for disabling OMP commands and extends object
+management.
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell, Michael Wiegand.
+
+Main changes since 4.0+beta2:
+* Object management has been extended to support creation and modification
+  times.
+* Support for disabling OMP commands via the command line has been added.
+
+
+openvas-manager 4.0+beta2 (2012-04-25)
+
+This is the second beta version of the upcoming 4.0 release of the OpenVAS
+Manager. It is the central management service between the actual security
+scanner and various user clients.
+
+This release contains an improved powerfilter feature, updated protocol
+documentation and an improved target object management. It also fixes an issue
+with the port list selection.
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell, Michael Wiegand.
+
+Main changes since 4.0+beta1:
+* Improvements to the target object management; targets can now be edited when
+  they are associated with a task and the task has not yet run.
+* A bug which caused the port list selection to be empty has been fixed.
+* The protocol documentation has been updated.
+* The powerfilter now handles spaces in index filters.
+
+
+openvas-manager 4.0+beta1 (2012-04-16)
+
+This is the first beta version of the upcoming 4.0 release of the OpenVAS
+Manager. It is the central management service between the actual security
+scanner and various user clients.
+
+This release introduces name change from Escalator to Alert and extended
+handling of Target object lists.
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell, Michael Wiegand.
+
+Main changes since 3.0 series:
+* Renamed Escalator to Alert.
+* Added keyword filter, pagination and edit to Targets.
+* New command line options --listen2 and --port2 for a second
+  OMP address.
+
+
+openvas-manager 3.0.0 (2012-03-26)
+
+This is the first release of the openvas-manager 3.0 module for the Open
+Vulnerability Assessment System release 5 (OpenVAS-5). The OpenVAS Manager is
+the central management service between the actual security scanner and various
+user clients.
+
+OpenVAS Manager 3.0 represents a significantly advanced feature set. Most
+notable is Asset Management, Port Lists, SecInfo Management with SCAP data,
+delta reports and prognostic reports.
+The whole functionality is available via the extended protocol: OMP 3.0.
+
+Many thanks to everyone who has contributed to this release:
+Henri Doreau, Stephan Kleine, Matthew Mundell, Jan-Oliver Wagner,
+Michael Wiegand and Felix Wolfsteller.
+
+Main changes since 2.0.x:
+
+* New: Configuration object 'Port Lists'. 
+* New: Integrated Asset Management.
+* New: Security Information Database: Integrated SCAP data (CPE, CVE) including
+  update method via feed service.
+* New: Delta reports to analyse differences between two scans.
+* New: Prognostic scans based on asset data and current SCAP data.
+* New: Support for individual time zones for users.
+* New: Tasks can be assigned "observes" for read-only access.
+* New: Role "Observer" for read-only access.
+* New: Support for notes/overrides lifetimes.
+* New: Trashcan. It is now possible to place some objects in a trashcan
+  instead of deleting them directly.
+* New: Container tasks for importing reports.
+* New: SSH port for Local Security Checks configurable.
+* New: Product detections as reported by Scanner are handled to allow detailed
+  cross-referenced detection information.
+* Updated builtin Report Format Plugins HTML, Text and LaTeX/PDF to reflect
+  various new features that are already present in GSA, including delta and
+  prognostic reports. 
+* Improved product detection information in results XML.
+* Improved performance for massiv scanner results by using transaction groups.
+* Improved Import of Target lists to allow comma-separated, line-by-line lists.
+* Doubled entries in Target lists are now eliminated.
+* New optional Report Format Plugin for ARF.
+* OMP 3.0: All new functionalities form the new version 3.0 of the OpenVAS
+  Management Protocol (OMP)
+* Changed: Report format signatures no longer contain user editable fields.
+* Support for large database files on 32-bit platforms has been improved.
+* A bug which caused the filter result count to be calculated incorrectly when
+  searching for text phrases has been fixed.
+* Support for sorting results by CVSS score has been added.
+* Support for importing results sent through the XML escalator has been added.
+* The max_host and max_checks scan performance parameters have been moved from
+  scan configs to tasks.
+* An issue which caused meta data for NVTs in the "Credentials" family to be not
+  present in the database has been fixed.
+* A number of compiler warnings discovered by Stephan Kleine have been
+  addressed.
+* Scan start and end times are now set for imported reports.
+* An issue which caused the import of very large reports to fail under certain
+  circumstances has been fixed.
+* The handling of long host lists has been improved.
+* Security: Enforces strict permissions on sensitive OpenVAS Manager files.
+* Security: Drop privileges before executing report format plugins if running with
+  elevated privileges.
+* Security: Ensures report formats are trusted before executing them.
+* Support for escalating result to a Sourcefire Defense Center has been added.
+* Support for using an SSH key pair for SSH authentication has been added.
+
+And additionally changes compared to last release candidate 3.0+rc1:
+
+* Extra report formats work standalone.
+* Observer lists now may also use ',' as separator.
+* Observers may now also create notes and overrides for observed tasks.
+* Opservers with with Role observer are now allowed to see single results
+  of the observed tasks.
+* Added handling of ssh keys for authenticated tests for Master-Slave mode.
+* The PID file is created earlier to avoid daemon handling believe there
+  is an error.
+* Build improvements for modern gcc.
+
+
+openvas-manager 3.0+rc1 (2012-03-15)
+
+This is the first release candidate of the upcoming 3.0 release of the OpenVAS
+Manager. It is the central management service between the actual security
+scanner and various user clients.
+
+This release adds the Port Lists feature and updates the built-in reports
+to cover delta and prognostic results.
+
+Many thanks to everyone who has contributed to this release:
+Henri Doreau, Matthew Mundell and Michael Wiegand.
+
+Main changes since 3.0+beta8:
+* Support for Port Lists has been added.
+* Updated builtin Report Format Plugins HTML, Text and LaTeX/PDF to reflect
+  various new features that are already present in GSA, including delta and
+  prognostic reports. 
+* Changed signing of Report Format Plugins to exclude comment.
+* Improved product detection information in results XML.
+* Improved performance for massiv scanner results by using transaction groups.
+* Improved Import of Target lists to allow comma-separated, line-by-line lists.
+* Doubled entries in Target lists are now eliminated.
+* New optional Report Format Plugin for ARF.
+* Updated OMP documentation.
+* Various little bugs fixed.
+
+
+openvas-manager 3.0+beta8 (2011-12-02)
+
+This is the eigth beta version of the upcoming 3.0 release of the OpenVAS
+Manager. It is the central management service between the actual security
+scanner and various user clients.
+
+This release adds support for note lifetimes and for displaying additional
+information in the HTML, LaTeX and TXT report formats. It also fixes an
+incorrect result count for Asset Management results.
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell and Michael Wiegand.
+
+Main changes since 3.0+beta7:
+* Support for note lifetimes has been added.
+* A bug which caused an incorrect result count in the Asset Management view has
+  been fixed.
+* Support for displaying the hostname and the note and override lifetimes has
+  been added to the following report formats: HTML, LaTeX and TXT.
+
+
+openvas-manager 3.0+beta7 (2011-11-23)
+
+This is the seventh beta version of the upcoming 3.0 release of the OpenVAS
+Manager. It is the central management service between the actual security
+scanner and various user clients.
+
+This release improves the handling of timestamps in reports and uses report
+format signatures without the user editable fields, ensure the trust level stays
+correct if these fields have been changed.
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell and Michael Wiegand.
+
+Main changes since 3.0+beta6:
+* The handling of timestamps in reports has been improved.
+* Report format signatures no longer contain user editable fields.
+
+
+openvas-manager 3.0+beta6 (2011-11-16)
+
+This is the sixth beta version of the upcoming 3.0 release of the OpenVAS
+Manager. It is the central management service between the actual security
+scanner and various user clients.
+
+This release adds support for listing NVTs addressing a certain CVE and for
+override lifetimes. It fixes a bug in the threat level display and improves the
+handling of SCAP data.
+
+Many thanks to everyone who has contributed to this release:
+Henri Doreau, Matthew Mundell and Michael Wiegand.
+
+Main changes since 3.0+beta5:
+* Support for listing NVTs addressing a certain CVE has been added.
+* A bug which cause the wrong threat level to be displayed for tasks with
+  multiple reports under rare circumstances has been fixed.
+* Support for override lifetimes has been added.
+* Support for displaying the SCAP update timestamp has been added.
+
+
+openvas-manager 3.0+beta5 (2011-10-10)
+
+This is the fifth beta version of the upcoming 3.0 release of the OpenVAS
+Manager. It is the central management service between the actual security
+scanner and various user clients.
+
+This release adds support for a number of new features, including asset
+management, direct use of SCAP data, prognostic scans, task observers and
+individual time zones for users. It also improves support for large database
+files on 32-bit platforms.
+
+NOTE: The Manager now expects the OpenVAS Scanner to send timestamps based on
+the UTC time zone. Care must be take to use UTC for the Scanner or upgrade to
+OpenVAS Scanner >= 3.3+beta2, which enforces the use of UTC internally.
+
+Many thanks to everyone who has contributed to this release:
+Henri Doreau, Matthew Mundell and Michael Wiegand.
+
+Main changes since 3.0+beta4:
+* Support for asset management been added.
+* Support for using SCAP data directly has been added.
+* A support script for retrieving SCAP data has been added.
+* Support for prognostic scans has been added.
+* Support for large database files on 32-bit platforms has been improved.
+* Support for task observers has been added.
+* Support for individual time zones for users has been added.
+
+
+openvas-manager 3.0+beta4 (2011-07-21)
+
+This is the fourth beta version of the upcoming 3.0 release of the OpenVAS
+Manager. It is the central management service between the actual security
+scanner and various user clients.
+
+This release resolves a minor issue discovered after the release of OpenVAS
+Manager 3.0+beta3 and adds support for sorting results by CVSS. For details,
+please refer to the list of changes below.
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell and Michael Wiegand.
+
+Main changes since 3.0+beta3:
+* A bug which caused the filter result count to be calculated incorrectly when
+  searching for text phrases has been fixed.
+* Support for sorting results by CVSS score has been added.
+* Support for importing results sent through the XML escalator has been added.
+* The max_host and max_checks scan performance parameters have been moved from
+  scan configs to tasks.
+
+
+openvas-manager 3.0+beta3 (2011-06-24)
+
+This is the third beta version of the upcoming 3.0 release of the OpenVAS
+Manager. It is the central management service between the actual security
+scanner and various user clients.
+
+This release resolves several minor issues discovered after the release of
+OpenVAS Manager 3.0+beta2 and adds support for delta reports. For details,
+please refer to the list of changes below.
+
+Many thanks to everyone who has contributed to this release:
+Henri Doreau, Stephan Kleine, Matthew Mundell and Michael Wiegand.
+
+Main changes since 3.0+beta2:
+* Support for delta reports has been added.
+* An issue which caused meta data for NVTs in the "Credentials" family to be not
+  present in the database has been fixed.
+* A number of compiler warnings discovered by Stephan Kleine have been
+  addressed.
+* A race condition which caused empty reports from the slave when running in
+  master-slave mode under certain conditions has been fixed.
+* Scan start and end times are now set for imported reports.
+
+
+openvas-manager 3.0+beta2 (2011-05-19)
+
+This is the second beta version of the upcoming 3.0 release of the OpenVAS
+Manager. It is the central management service between the actual security
+scanner and various user clients.
+
+This release resolves several minor issues discovered after the release of
+OpenVAS Manager 3.0+beta1. For details, please refer to the list of changes
+below.
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell and Michael Wiegand.
+
+Main changes since 3.0+beta1:
+* An issue which caused the import of very large reports to fail under certain
+  circumstances has been fixed.
+* An issue which caused the date of the scan end to be missing from scans if
+  they were associated with an escalator created with an early Manager version
+  has been fixed.
+* The handling of long host lists has been improved.
+
+
+openvas-manager 3.0+beta1 (2011-03-02)
+
+This is the first beta version of the upcoming 3.0 release of the OpenVAS
+Manager. It is the central management service between the actual security
+scanner and various user clients.
+
+This release introduces a number of new features. For details, please refer to
+the list of changes below.
+
+Many thanks to everyone who has contributed to this release:
+Stephan, Kleine, Matthew Mundell, Michael Wiegand and Felix Wolfsteller.
+
+Main changes since 2.0 series:
+* New feature: Trashcan. It is now possible to place objects in a trashcan
+  instead of deleting them directly.
+* Support for Host Details reported by OpenVAS Scanner has been added.
+* Support for container task (imported reports) has been added.
+* Support for specifying an SSH port for Local Security Checks has been added.
+* Security: Enforces strict permissions on sensitive OpenVAS Manager files.
+* Security: Drop privileges before executing report format plugins if running with
+  elevated privileges.
+* Security: Ensures report formats are trusted before executing them.
+* Support for escalating result to a Sourcefire Defense Center has been added.
+* Support for using an SSH key pair for SSH authentication has been added.
+* The mail addresses supplied for an email escalator are now used in the correct
+  order.
+
+
+openvas-manager 2.0.2 (2011-03-02)
+
+This is the second maintenance release of the openvas-manager 2.0 module for the
+Open Vulnerability Assessment System release 4 (OpenVAS-4). The OpenVAS Manager
+is the central management service between the actual security scanner and
+various user clients.
+
+This release closes a number of memory and resource leaks discovered after the
+release of OpenVAS Manager 2.0.1, fixes the host count calculation and fixes an
+issue which occurred when upgrading very old installations.
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell, Michael Wiegand and Felix Wolfsteller.
+
+Main changes since 2.0.1:
+* The test infrastructure has been updated.
+* A bug which caused the host count to be calculated incorrectly under certain
+  circumstances has been fixed.
+* A number of memory and resource leaks discovered by Felix Wolfsteller have
+  been closed.
+* A bug which caused database migration to fail when upgrading very old
+  installations has been fixed.
+
+
+openvas-manager 2.0.1 (2011-02-18)
+
+This is the first maintenance release of the openvas-manager 2.0 module for the
+Open Vulnerability Assessment System release 4 (OpenVAS-4). The OpenVAS Manager
+is the central management service between the actual security scanner and
+various user clients.
+
+This release adds support for fallback system reports, changes the default value
+of the "unscanned_closed" preference to "yes" for predefined configurations and
+fixes an issue with signature verification in the manager. It also contains
+improvements to report format signature infrastructure and fixes an issue with
+the host name validation.
+
+Many thanks to everyone who has contributed to this release:
+Stephan Kleine, Matthew Mundell and Michael Wiegand.
+
+Main changes since 2.0.0:
+* Support for fallback system reports has been added in case where a full system
+  report is unavailable.
+* The expected location for signatures has been updated to match the FHS related
+  changes in OpenVAS Scanner.
+* The "unscanned_closed" preference now defaults to "yes" for predefined
+  configs.
+* The report format signature infrastructure has been improved.
+* A bug which caused valid host names to be reject under certain circumstances
+  has been fixed.
+
+
+openvas-manager 2.0.0 (2011-02-08)
+
+This is the first release of the openvas-manager 2.0 module for the Open
+Vulnerability Assessment System release 4 (OpenVAS-4). The OpenVAS Manager is
+the central management service between the actual security scanner and various
+user clients.
+
+OpenVAS Manager 2.0 represents a significantly advanced feature set. Most
+notable is the new plugin-based report format framework which allows to produce
+arbitrary scan reports (text, graphs, maps, connectors etc.). The new
+master-slave mode allow to network multiple Manager instances. The whole
+functionality is available via the extended protocol: OMP 2.0.
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell, Jan-Oliver Wagner, Michael Wiegand and Felix Wolfsteller.
+
+Main changes since 1.0.x:
+
+* Report Format plugin framework. All previous reporting features were converted
+  to plugins. The XML representation of a report is now the base for any plugin
+  and thus consistency of reports is improved.
+
+  Report Format Plugins can be set active so that they appear in the selection
+  lists. Selections can consider content types so that for example only the
+  plugins with content type "text" are offered as email body.
+
+  It is possible to use parameters for the plugins so the user can adjust the
+  behaviour of the Report Format to the individual preferences or needs.
+
+  A verification method allows to distribute signatures for valid plugins via
+  the NVT Feed.
+
+* New default Report Format: TXT for simple text.
+
+* New default Report Format: LaTeX for LaTeX source.
+
+* New sample Report Format: Simple Bar Chart.
+  Demonstrates how to use Gnuplot for graphical reports.
+
+* New sample Report Format: Simple Topo Plot.
+  Demonstrates how to use Graphviz for graphical reports.
+
+* New sample Report Format: Simple Pie Chart.
+  Demonstrates how to use PyChart for graphical reports.
+
+* New sample Report Format: Simple Map Plot.
+  Demonstrates how to use MapServer and GDAL for graphical reports.
+
+* New sample Report Format: Sourcefire Host Input.
+  Demonstrates that Report Formats can be used to build connectors.
+
+* Master-Slave feature. Any OpenVAS Manager can use one or many other OpenVAS
+  Manager as slave to run scans. The whole scan task is transferred to the
+  slave, results are continuously reported to the Master during scan process.
+  After the scan is finished all data are removed from the slave.
+
+  The master can also retrieve system reports from the slave and thus can
+  collect the performance overview for all configured slaves.
+
+* New Escalator: HTTP GET. This allows for example to access text message (SMS)
+  gateways or ticket management systems.
+
+* Extended Escalator: For email escalation it is now possible
+  to select from configured Report Formats to be included in the email body.
+
+* Agents: A verification method was added. This allows to distribute signatures
+  for valid agents via the NVT Feed.
+
+* Credentials: Can now be edited. This allows to change the login name or
+  password without the need to create a new scan configuration.
+
+* Credentials: Auto-generated installer packages are now created on the fly. If
+  the generators are improved, it is now easy to create an updated package for
+  already existing credentials.
+
+* Credentials: Credentials for SMB and SSH are now separated.
+
+* OMP self-documentation: Part of the Managers' XML-based communication protocol
+  OMP 2.0 is to deliver the full specification and documentation of the
+  protocol itself (command "HELP"). It can be retrieved as XML-,
+  RNC- or HTML representation.
+
+* Targets: Various opportunities have been added to specify and combine IP
+  ranges and ports.
+
+* Tasks: The task overview is delivered much faster now.
+
+* Reports: The report filtering is much faster now.
+
+* Hardening flags are now enabled during compile time to increase code quality.
+
+* Compliance with the GNU Coding Standards and the Filesystem Hierarchy
+  Standard has been improved.
+
+* A security-relevant bug has been fixed regarding email escalation methods.
+  Configured OpenVAS users were able to damage installation and/or gain higher
+  privileges.
+
+Main changes since 2.0+rc4:
+* The logging behaviour when started with --verbose has been improved.
+* The w3af NVT is no longer part of the Full and fast default scan config.
+* The build environment has been cleaned up.
+
+
+openvas-manager 2.0+rc4 (2011-02-04)
+
+This is the fourth release candidate for the upcoming 2.0 release of the OpenVAS
+Manager. It is the central management service between the actual security
+scanner and various user clients. Release 2.0 is part of OpenVAS 4, the next
+generation of the Open Vulnerability Assessment System.
+
+It fixes an issue in override creation and feature an improved documentation and
+build environment and is now compliant to the Filesystem Hierarchy Standard
+(FHS), version 2.3.
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell, Jan-Oliver Wagner and Michael Wiegand.
+
+Main changes since 2.0+rc2:
+* Documentation has been updated.
+* OpenVAS Manager now uses pkg-config to find required libraries.
+* An issue which caused the creation of overrides to fail under some
+  circumstances has been fixed.
+* The installation is now compliant with Filesystem Hierarchy Standard (FHS
+  2.3).
+
+
+openvas-manager 2.0+rc3 (2011-01-21)
+
+This is the third release candidate for the upcoming 2.0 release of the OpenVAS
+Manager. It is the central management service between the actual security
+scanner and various user clients. Release 2.0 is part of OpenVAS 4, the next
+generation of the Open Vulnerability Assessment System.
+
+It fixes a serious security bug and it is highly recommended to update any
+installation of OpenVAS Manager 2.0 with this release. It also fixes a database
+migration issue and introduces a better setting for the default logging.
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell, Jan-Oliver Wagner and Michael Wiegand.
+
+Main changes since 2.0+rc2:
+* A security-relevant bug has been fixed regarding email escalation methods.
+  Configured OpenVAS users were able to damage installation and/or gain higher
+  privileges.
+* An issue which caused database migration to fail under certain circumstances
+  has been fixed.
+* The default log level has been reduced to warning to prevent the logging of
+  potentially sensitive information in the default configuration.
+
+
+openvas-manager 2.0+rc2 (2011-01-10)
+
+This is the second release candidate for the upcoming 2.0 release of the OpenVAS
+Manager. It is the central management service between the actual security
+scanner and various user clients. Release 2.0 is part of OpenVAS 4, the next
+generation of the Open Vulnerability Assessment System.
+
+This release features updated protocol documentation, masks passwords when LSC
+package creation commands are logged and makes the output of --version compliant
+with the GNU Coding Standards.
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell, Jan-Oliver Wagner, Michael Wiegand and Felix Wolfsteller.
+
+Main changes since 2.0+rc1:
+* The protocol documentation has been brought up to date.
+* The output of --version now complies with the GNU Coding Standards.
+* Passwords are now masked when loggings LSC package creation commands.
+
+
+openvas-manager 2.0+rc1 (2010-12-21)
+
+This is the first release candidate for the upcoming 2.0 release of the OpenVAS
+Manager. It is the central management service between the actual security
+scanner and various user clients. Release 2.0 is part of OpenVAS 4, the next
+generation of the Open Vulnerability Assessment System.
+
+This release adds support for separate SMB and SSH credentials, for setting
+per-target port ranges and for retrieving the total number of results matching
+an applied filter.
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell and Michael Wiegand.
+
+Main changes since 2.0+beta3:
+* The protocol documentation has been improved.
+* Target credentials for SMB and SSH are now separated.
+* Support for setting the port range for a target has been added.
+* Hardening flags are now enabled during compile time to increase code quality.
+* Support for retrieving the total number of results matching an applied filter
+  has been added.
+
+
+openvas-manager 2.0+beta3 (2010-12-10)
+
+This is the third beta version of the upcoming 2.0 release of the OpenVAS
+Manager. It is the central management service between the actual security
+scanner and various user clients.  Release 2.0 is part of OpenVAS 4, the next
+generation of the Open Vulnerability Assessment System.
+
+This release includes further improvements to the protocol self-documentation
+and fixes two issues regarding internal links in PDF reports and downloads of
+LSC credential packages. It also enables NTLMSSP support for NVTs by default to
+improve LSC behaviour for Microsoft Windows, makes escalator messages more
+informational and LaTeX and PDF reports more consistent with other report
+formats.
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell and Michael Wiegand.
+
+Main changes since 2.0+beta2:
+* The protocol self-documentation has been improved.
+* NTLMSSP is now enabled by default.
+* Escalator message now include more information.
+* The LaTeX and PDF reports have been made more consistent with the other
+  report formats.
+* An issue which caused internal links in the PDF report to link to wrong
+  results under certain circumstances has been fixed.
+* An issue which caused some existing LSC credential packages to be empty on
+  subsequent downloads under certain circumstances has been fixed.
+
+
+openvas-manager 2.0+beta2 (2010-12-01)
+
+This is the second beta version of the upcoming 2.0 release of the OpenVAS
+Manager. It is the central management service between the actual security
+scanner and various user clients.  Release 2.0 is part of OpenVAS 4, the next
+generation of the Open Vulnerability Assessment System.
+
+This release includes a fix for incorrect counting in the ports overview and
+features an improved protocol self-documentation, an improved logging
+infrastructure and a speed up for LaTeX and PDF report generation.
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell and Michael Wiegand.
+
+Main changes since 2.0+beta2:
+* The protocol self-documentation has been improved.
+* A number of superfluous log messages has been downgraded or removed.
+* A bug which caused issues to be counted incorrectly in the ports overview has
+  been fixed.
+* The generation of PDF and LaTeX reports is now faster.
+
+
+openvas-manager 2.0+beta1 (2010-11-19)
+
+This is the first beta version of the upcoming 2.0 release of the
+OpenVAS Manager. It is the central management service between
+the actual security scanner and various user clients.
+Release 2.0 is part of OpenVAS 4, the next generation
+of the Open Vulnerability Assessment System.
+
+OpenVAS Manager 2.0 represents a significantly advanced feature set.
+Most notable is the new plugin-based report format framework which
+allows to produce arbitrary scan reports (text, graphs, maps, connectors etc).
+The new master-slave mode allow to network multiple Manager instances.
+The whole functionality is available via the extended protocol: OMP 2.0.
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell, Jan-Oliver Wagner, Michael Wiegand and Felix Wolfsteller.
+
+Central new features of OpenVAS Manager 2.0:
+
+* Report Format plugin framework. All previous reporting features
+  were converted to plugins. The XML representation of a report
+  is now the base for any plugin and thus consistency of reports
+  is improved.
+
+  Report Format Plugins can be set active so that they
+  appear in the selection lists. Selections can consider
+  content types so that for example only the plugins with
+  content type "text" are offered as Email body.
+
+  It is possible to use parameters for the plugins so the
+  user can adjust the behaviour of the Report Format to
+  the individual preferences or needs.
+
+  A verification method allows to distribute signatures
+  for valid plugins via the NVT Feed.
+
+* New default Report Format: TXT for simple text.
+
+* New default Report Format: LaTeX for LaTeX source.
+
+* New sample Report Format: Simple Bar Chart.
+  Demonstrates how to use Gnuplot for graphical reports.
+
+* New sample Report Format: Simple Topo Plot.
+  Demonstrates how to use Graphviz for graphical reports.
+
+* New sample Report Format: Simple Pie Chart.
+  Demonstrates how to use PyChart for graphical reports.
+
+* New sample Report Format: Simple Map Plot.
+  Demonstrates how to use MapServer and GDAL for graphical reports.
+
+* New sample Report Format: Sourcefire Host Input.
+  Demonstrates that Report Formats can be used to build connectors.
+
+* Master-Slave feature. Any OpenVAS Manager can use one or many other
+  OpenVAS Manager as slave to run scans. The whole scan task
+  is transferred to the slave, results are continuously reported
+  to the Master during scan process. After the scan is finished
+  all data are removed from the slave.
+
+  The master can also retrieve system reports from the slave and
+  thus can collect the performance overview for all configured slaves.
+
+* New Escalator: HTTP GET. This allows for example to access
+  text message (SMS) gateways or ticket management systems.
+
+* Extended Escalator: For EMail escalation it is now possible
+  to select from configured Report Formats to be included in the
+  Email body.
+
+* Agents: A verification method was added. This allows to
+  distribute signatures for valid agents via the NVT Feed.
+
+* Credentials: Can now be edited. This allows to change the login
+  name or password without the need to create a new scan configuration.
+
+* Credentials: Auto-generated installer packages are now created on
+  the fly. If the generators are improved, it is now easy to create
+  an updated package for already existing credentials.
+
+* OMP self-documentation: Part of the Managers' XML-based communication protocol
+  OMP 2.0 is to deliver the full specification and documentation of the
+  protocol itself (command "HELP"). It can be retrieved as XML-,
+  RNC- or HTML representation.
+
+* Targets: Various opportunities have been added to specify and combine IP ranges.
+
+* Tasks: The task overview is delivered much faster now.
+
+* Reports: The report filtering is much faster now.
+
+
+openvas-manager 1.0.0 (2010-07-29)
+
+This is the 1.0.0 release of the openvas-manager module for the Open
+Vulnerability Assessment System (OpenVAS).
+
+OpenVAS Manager 1.0 represents almost 2 years of intensive work.  The mission of
+OpenVAS Manager is to offer powerful and comfortable vulnerability management on
+top of the actual vulnerability scanner, OpenVAS Scanner 3.1.
+
+The OpenVAS Manager is a layer between the OpenVAS Scanner and various client
+applications. The upcoming clients cover web, desktop and command line
+technology and will replace the classic OpenVAS Client.
+
+Central features of OpenVAS Manager are:
+
+* New XML-based protocol OMP (OpenVAS Management Protocol) which client tools
+  use to control scans, results, etc.
+
+* SQL database where configurations, scan results etc. are stored. Thus, clients
+  do not need to keep local storage anymore.
+
+* Full control of scan processes. This includes multiple concurrent scans as
+  well as stopping, pausing, resuming and not at least the scheduling of scans.
+
+* Management of scan notes, false positives and result escalators (notification
+  on finished scans).
+
+OpenVAS Manager is Free Software (Open Source), licensed under GNU General
+Public License Version 2 or any later version.
+
+The first compatible client application to be released will be the web client
+GSA (Greenbone Security Assistant), approximately next week.
+Beta- and alpha versions of various clients are already available for download.
+
+The OpenVAS development team offers support for any efforts to create binary
+packages for the various Linux distributions in order have this new server
+readily available for users as soon as possible. Please use our openvas-distro
+mailing list for this purpose.
+
+Many thanks to everyone who has contributed to this release since 1.0.0.rc1:
+Stephan Kleine, Matthew Mundell, Jan-Oliver Wagner, Michael Wiegand and Felix
+Wolfsteller.
+
+Main changes since 1.0.0.rc1:
+* A number of build issues has been addressed.
+* The code documentation has been updated.
+* Code cleanup: Internal error handling has been made more consistent.
+* A potential ressource leak identified by static analysis has been fixed.
+* A bug which caused NVT preferences to be displayed incorrectly has been
+  fixed.
+
+
+openvas-manager 1.0.0.rc1 (2010-07-15)
+
+This is the first release candidate of the openvas-manager module for the Open
+Vulnerability Assessment System (OpenVAS) leading up to the upcoming
+openvas-manager 1.0.
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell, Michael Wiegand and Felix Wolfsteller.
+
+Main changes since 1.0.0-beta7:
+* Code cleanup: Internal resource management has been improved to use UUIDs in
+  more places.
+* Support for agents has been improved.
+* Support for external target sources has been added.
+* A bug which caused PDF exports to fail if the NVT description contained
+  certain characters has been fixed.
+* A bug which caused hosts in the scan result to be sorted incorrectly under
+  certain circumstances has been fixed.
+* Support for defining threat overrides has been added.
+* Some OMP commands have been renamed and adjusted to make the protocol more
+  concise and useful.
+* Support for event logging has been added.
+* Support for syslog escalators has been added.
+* The documentation has been updated.
+
+
+openvas-manager 1.0.0-beta7 (2010-05-28)
+
+This is the seventh beta release of the openvas-manager module for the Open
+Vulnerability Assessment System (OpenVAS) leading up to the upcoming
+openvas-manager 1.0.
+
+IMPORTANT: Since version 1.0.0-beta6, the manager uses certificate based
+authentication to authenticate against an openvas-scanner. Please do read the
+INSTALL file provided with openvas-manager and make sure you have
+openvas-scanner 3.0.2 or higher before installing this manager version!
+
+Many thanks to everyone who has contributed to this release:
+Stephan Kleine, Matthew Mundell, Michael Wiegand and Felix Wolfsteller.
+
+Main changes since 1.0.0-beta6:
+
+* A large amount of code which was present in both openvas-manager and
+  openvas-administrator has been moved to openvas-libraries.
+* An issue that caused started tasks to remain in the "Requested" stage
+  indefinitely has been fixed.
+* An issue that caused incorrect values of the scan progress under certain
+  conditions has been fixed.
+* A new escalator condition has been add: Threat Level Changed.
+* Open ports are now included in scan reports even if no vulnerability was
+  detected on that port.
+* Support for CVSS scores and Risk Factors has been improved.
+* Support for excluding host without any results from the report has been added.
+
+
+openvas-manager 1.0.0-beta6 (2010-04-15)
+
+This is the sixth beta release of the openvas-manager module for the Open
+Vulnerability Assessment System (OpenVAS) leading up to the upcoming
+openvas-manager 1.0.
+
+IMPORTANT: The manager now uses certificate based authentication to authenticate
+against an openvas-scanner. Please do read the INSTALL file provided with
+openvas-manager and make sure you have openvas-scanner 3.0.2 or higher before
+installing this manager version!
+
+Many thanks to everyone who has contributed to this release:
+Hartmut Goebel, Stephan Kleine, Matthew Mundell, Joseph Sokol-Margolis,
+Jan-Oliver Wagner, Michael Wiegand and Felix Wolfsteller.
+
+Main changes since 1.0.0-beta5:
+
+* A bug which caused incorrect NVT counts in the scan config under certain
+  circumstances has been fixed.
+* The manager now uses certificate based authentication.
+* Support for resuming stopped tasks has been added.
+* Support for task scheduling has been added.
+* The openvasmd binary will now install into /usr/sbin instead of /usr/bin.
+
+
+openvas-manager 1.0.0-beta5 (2010-03-04)
+
+This is the fifth beta release of the openvas-manager module for the Open
+Vulnerability Assessment System (OpenVAS) leading up to the upcoming
+openvas-manager 1.0.
+
+Many thanks to everyone who has contributed to this release:
+Stephan Kleine, Matthew Mundell and Felix Wolfsteller.
+
+Main changes since 1.0.0-beta4:
+
+* More internal data structures are now identified by UUID and not by
+  name.
+* Several build issues have been fixed.
+* Note management has been introduced.
+* Support for handling ITG and CPE reports has been added.
+* OTP forwarding is now disabled by default.
+
+
+openvas-manager 1.0.0-beta4 (2010-02-08)
+
+This is the fourth beta release of the openvas-manager module for the Open
+Vulnerability Assessment System (OpenVAS) leading up to the upcoming
+openvas-manager 1.0.
+
+Many thanks to everyone who has contributed to this release:
+Stephan Kleine and Matthew Mundell.
+
+Main changes since 1.0.0-beta3:
+
+* More internal data structures are now identified by UUID and not by
+  name.
+* A bug which prevented PDF reports to be generated from certain results due to
+  unescaped LaTeX characters has been fixed.
+* A number of formatting and casting issues found by Stephan Kleine have been
+  fixed.
+* The man page has been updated.
+
+
+openvas-manager 1.0.0-beta3 (2010-02-05)
+
+This is the third beta release of the openvas-manager module for the Open
+Vulnerability Assessment System (OpenVAS) leading up to the upcoming
+openvas-manager 1.0.
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell and Felix Wolfsteller.
+
+Main changes since 1.0.0-beta2:
+
+* Nmap is now the default port scanner for predefined configurations.
+* The man page has been updated.
+* LSC credential management has been improved.
+* A number of internal data structures are now identified by UUID and not by
+  name.
+* The manager now converts all input from the scanner to UTF-8.
+* The encoding of the LaTeX report has been switch to UTF-8.
+* A bug that caused some settings to be ignored during scan configuration import
+  has been fixed.
+
+
+openvas-manager 1.0.0-beta2 (2010-01-26)
+
+This is the second beta release of the openvas-manager module
+for the Open Vulnerability Assessment System (OpenVAS) leading up to the
+upcoming openvas-manager 1.0.
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell and Felix Wolfsteller.
+
+Main changes since 1.0.0-beta1:
+
+* Deleting of active reports is prevented.
+* Introduced ownership for all objects.
+  This makes objects (like a "target") not
+  appear for other users anymore.
+* Improved ISO-8859-1 to UTF-8 conversion hacks.
+* Allowed "\" for login names (important for windows)
+* Send users host restrictions ("rules") via OTP when
+  starting a scan.
+* Activated NSIS package generator for credentials management.
+* Filter out potentials passwords from logging.
+* Introduced UUIDs for users.
+* Improved PDF report generator.
+
+
+openvas-manager 1.0.0-beta1 (2010-01-12)
+
+This is the first beta release of the openvas-manager module
+for the Open Vulnerability Assessment System (OpenVAS) leading up to the
+upcoming openvas-manager 1.0.
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell, Felix Wolfsteller and Michael Wiegand.
+
+Main changes since 0.9.8:
+
+* Agent support has been improved.
+* Escalation support has been added.
+* A bug in PDF generation which could cause the manager to stay in an infinite
+  loop under certain conditions has been fixed.
+* Support for exporting scan configurations has been added.
+* Support for performance monitoring has been added.
+* An issue which could cause some preferences not to be sent to the scanner has
+  been fixed.
+* Initial searching support has been added.
+
+
+openvas-manager 0.9.8 (2009-12-21)
+
+This is the fourteenth development release of the openvas-manager module
+for the Open Vulnerability Assessment System (OpenVAS).
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell, Jan-Oliver Wagner, Felix Wolfsteller and Michael Wiegand.
+
+Main changes since 0.9.7:
+
+* Database performance has been improved.
+* Credential management has been improved.
+* Initial agent support has been added.
+* Support for cross-referencing in tasks, configs and targets has been added.
+
+
+openvas-manager 0.9.7 (2009-12-08)
+
+This is the thirteenth development release of the openvas-manager module
+for the Open Vulnerability Assessment System (OpenVAS).
+
+Many thanks to everyone who has contributed to this release:
+Michael Wiegand and Tim Brown.
+
+Main changes since 0.9.6:
+
+* A bug which caused the number of selected NVTs within a family to be wrongly
+  calculated under certain circumstances has been fixed.
+
+
+openvas-manager 0.9.6 (2009-12-01)
+
+This is the twelfth development release of the openvas-manager module
+for the Open Vulnerability Assessment System (OpenVAS).
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell and Felix Wolfsteller.
+
+Main changes since 0.9.5:
+
+* Support for empty scan config templates has been added.
+
+
+openvas-manager 0.9.5 (2009-11-30)
+
+This is the eleventh development release of the openvas-manager module
+for the Open Vulnerability Assessment System (OpenVAS).
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell and Felix Wolfsteller.
+
+Main changes since 0.9.4:
+
+* Server preference handling has been improved.
+* The build environment has been made more robust.
+* Support for per-NVT timeouts has been added.
+* The database upgrade has been made more flexible.
+* The library used for UUID generation has been changed to a more widely
+  available library.
+* Updating of the internal cache has been improved.
+* The layout of the PDF reports has been improved.
+* An issue with long task start times has been fixed.
+* Cache management has been improved.
+
+
+openvas-manager 0.9.4 (2009-11-23)
+
+This is the tenth development release of the openvas-manager module
+for the Open Vulnerability Assessment System (OpenVAS).
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell and Felix Wolfsteller.
+
+Main changes since 0.9.3:
+
+* The layout of the PDF reports has been improved.
+* A bug which broke DB migration under certain circumstances has been fixed.
+* Support for NVT family retrieval and configuration management has been
+  introduced.
+* Cache management has been improved.
+
+
+openvas-manager 0.9.3 (2009-11-09)
+
+This is the ninth development release of the openvas-manager module
+for the Open Vulnerability Assessment System (OpenVAS).
+
+Many thanks to everyone who has contributed to this release:
+Matthew Mundell, Felix Wolfsteller and Michael Wiegand.
+
+Main changes since 0.9.2:
+
+* Database handling and migration has been improved.
+* Code cleanup.
+* NVT selection based on the family attributed has been introduced.
+* Sorting parameters have been added to most data retrieval commands.
+* Support for retrieving NVT preferences has been introduced.
+* The NBE output has been harmonized with the NBE output of openvas-client.
+* Support for filtering results has been added.
+* The layout of the LaTeX reports has been improved.
+* The layout of the PDF reports has been improved.
+
+
+openvas-manager 0.9.2 (2009-10-26)
+
+This is the eigth development release of the openvas-manager module
+for the Open Vulnerability Assessment System (OpenVAS).
+
+Many thanks to everyone who has contributed to this release:
+Tim Brown, Matthew Mundell, Felix Wolfsteller, Jan-Oliver Wagner and Michael
+Wiegand.
+
+Main changes since 0.9.1:
+
+* Improved preference caching.
+* Support for migrating old openvas-manager databases has been added.
+* Pidfile management has been refactored.
+* LSC support has been improved.
+* The layout of the LaTeX reports has been improved.
+* Many more fixes and improvements.
+
+
+openvas-manager 0.9.1 (2009-10-19)
+
+This is the seventh development release of the openvas-manager module
+for the Open Vulnerability Assessment System (OpenVAS).
+
+Many thanks to everyone who has contributed to this release:
+Tim Brown, Matthew Mundell, Felix Wolfsteller, Jan-Oliver Wagner and Michael
+Wiegand.
+
+Main changes since 0.9.0:
+
+* NVT preferences are now cached in the database.
+* Support for storing and sending files has been added.
+* Parsing of the NVT category has been fixed.
+* Premature pidfile deletion has been fixed.
+* The START_TASK response now contains the id of the report for this scan.
+* Many more fixes and improvements.
+
+
+openvas-manager 0.9.0 (2009-09-30)
+
+This is the sixth development release of the openvas-manager module
+for the Open Vulnerability Assessment System (OpenVAS).
+
+Many thanks to everyone who has contributed to this release:
+Mattew Mundell, Felix Wolfsteller and Jan-Oliver Wagner.
+
+Main changes since 0.8.1:
+
+* Moved OMP library to openvas-libraries
+* openvas-libraries >= 3.0 now required
+* Add support of OMP commands CREATE_LSC_CREDENTIAL,
+  DELETE_LSC_CREDENTIAL and GET_LSC_CREDENTIALS.
+* Many fixes and improvements
+
+openvas-manager 0.8.1 (2009-09-14)
+
+This is a maintenance release of the openvas-manager module for the Open
+Vulnerability Assessment System (OpenVAS).
+
+It contains a number of small improvements and bugfixes.
+
+
+openvas-manager 0.7.0 (2009-08-21)
+
+This is a maintenance release of the openvas-manager module for the Open
+Vulnerability Assessment System (OpenVAS).
+
+It contains considerable changes and vastly improved functionality.
+
+
+openvas-manager 0.6.1 (2009-06-22)
+
+This is a maintenance release of the openvas-manager module for the Open
+Vulnerability Assessment System (OpenVAS).
+
+It contains a few minor changes to improve compatibility with the Debian
+packaging system and other OpenVAS modules.
+
+
+openvas-manager 0.6.0 (2009-06-18)
+
+This is the second public release of the openvas-manager module for the Open
+Vulnerability Assessment System (OpenVAS).
+
+It offers improved support for the new OpenVAS Management Protocol (OMP) and
+new and improved functionality.
+The following areas have been added or significantly improved:
+- User authentication
+- Task ID assignment (UUIDs)
+- Retrieving checksums of the NVT collection
+- NVT information retrieval
+- Certificate handling
+
+In addition, the protocol implementation has been updated to match
+the specification more closely.
+
+
+openvas-manager 0.5.0 (2009-05-08)
+
+This is the first public release of the openvas-manager module for the Open
+Vulnerability Assessment System (OpenVAS).
+
+The OpenVAS Manager aims to be a layer between OpenVAS-Client and
+the actual OpenVAS Server. Basically it should be responsible for
+any tasks where no high system privileges are required.
+
+This module is in an early development stage and not yet intended for
+production use.
+
+It is not mandatory to have OpenVAS Manager for using OpenVAS 1.0 or 2.0.
+
+Usage example:
+If openvasd is running on port 7772, the following command starts the manager
+on port 1241.  The client can then connect to port 1241 as though it was
+connecting to openvasd.
+
+# openvasmd --port 1241 --sport 7772
+
+More information about the command line arguments can be obtained using:
+
+# openvasmd --help
