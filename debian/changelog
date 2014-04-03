@@ -1,3 +1,9 @@
+openvas-manager (4.0.2-2) UNRELEASED; urgency=low
+
+  * Added missing /usr/share/openvas/cert directory to package.
+
+ -- Xavi Serrano <xavise.com@gmail.com>  Thu, 03 Apr 2014 15:26:29 +0200
+
 openvas-manager (4.0.2) UNRELEASED; urgency=low
 
   * New upstream release.

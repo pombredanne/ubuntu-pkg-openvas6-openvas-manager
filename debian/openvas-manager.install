@@ -3,3 +3,4 @@ usr/sbin
 usr/share/man/man8
 usr/share/openvas/openvasmd
 usr/share/openvas/scap
+usr/share/openvas/cert
